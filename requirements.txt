@@ -5,3 +5,4 @@ google-auth-transport-requests
 google-api-python-client
 google-generativeai
 email
+gophish
