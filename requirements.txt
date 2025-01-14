@@ -1,4 +1,5 @@
 appdirs==1.4.4
+<<<<<<< HEAD
 blinker==1.9.0
 certifi==2020.6.20
 chardet==3.0.4
@@ -11,7 +12,7 @@ importlib_metadata==8.5.0
 itsdangerous==2.2.0
 Jinja2==3.1.5
 MarkupSafe==3.0.2
-packaging==20.4
+ackaging==20.4
 pyparsing==2.4.7
 python-dateutil==2.8.1
 requests==2.24.0
