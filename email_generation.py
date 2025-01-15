@@ -6,9 +6,9 @@ import random
 
 def initialize_genai(key_file: str = "key.json"):
     """
-    Initializes the Google Generative AI model using an API key stored in config.json file.
+    Initializes the Google Generative AI model using an API key stored in key.json file.
 
-    :param config_file: A string that represents the path to the config.json file.
+    :param key.json: A string that represents the path to the key.json file.
     :return: An instance of the initialized generative model (genai.GenerativeModel).
     :raises FileNotFoundError: If the configuration file is not found.
     :raises KeyError: If the "GEMINI_API_KEY" is missing in the configuration file.
@@ -26,39 +26,39 @@ def initialize_genai(key_file: str = "key.json"):
     model = genai.GenerativeModel('gemini-pro')
     return model
 
-def generate_email(model, name, lastname, teamname, businessunit):
+def generate_email(model, name,lastname, position):
 
     # Phishing parameters microsoft
     phishing_parameters_microsoft = [
-    {"Details": "Try the new Microsoft AI-powered assistant. Priority access for your business unit", 
+    {"Details": "Try the new Microsoft AI-powered assistant. Priority access for your Proximus businedd unit thurght our Microsoft Gold Partnership", 
         "Fake Link": "https://example.com/secure-login", 
-        "Created By": "Sam Sussy", 
-        "Position": "IT Support Specialist",
+        "Created By": "Carine Dewier", 
+        "Position": "Partnership manager",
         "Reason": "New AI-powered assistant"},
     
-    {"Details": "Your business unit is changing Microsoft Office License. Will Expire Soon", 
+    {"Details": "As a Microsoft Gold Partner, Proximus has new funcionalities for hibrid work within your team. Add this funcionalities to your account", 
         "Fake Link": "https://example.com/reset-password", 
-        "Created By": "Sally Sneaky", 
-        "Position": "License Management Specialist", 
-        "Reason": "Office License Expiry"},
+        "Created By": "Jean-Renaud Kervella", 
+        "Position": "Senior Account Executive", 
+        "Reason": "Add new funcionalities for hibrid work"},
     
     {"Details": "Exclusive Training Webinar on New Tools", 
         "Fake Link": "https://example.com/join-webinar", 
-        "Created By": "Richard Rascal", 
-        "Position": "Training Coordinator", 
+        "Created By": "Hugues Deroubaix", 
+        "Position": "Head of Channel Strategy and Operations", 
         "Reason": "Webinar Invitation"},
     
     {"Details": "Email Storage Full. Please clear space immediately", 
         "Fake Link": "https://example.com/manage-storage", 
-        "Created By": "Bernard Bandit", 
-        "Position": "System Administrator", 
+        "Created By": "Karin Dehaeseleer", 
+        "Position": "Assistant to Director Content Partnerships & Sponsoring", 
         "Reason": "Email Storage Full"}
     ]
 
     random_pick = random.choice(phishing_parameters_microsoft)
 
     # Formulate a prompt
-    prompt = f'''Write an email from {random_pick["Created By"]}, a {random_pick["Position"]}, to {name} {lastname}, a member of the {teamname} team in the {businessunit} business unit. 
+    prompt = f'''Write an email from {random_pick["Created By"]}, a {random_pick["Position"]}, to {name} {lastname}, whose role in the company is {position}. 
     The email should convey the following message: 
     {random_pick["Details"]}. 
     Ensure the tone is professional and polite, with clear instructions for {name} to click on this link: {random_pick["Fake Link"]}. 
@@ -70,12 +70,11 @@ def generate_email(model, name, lastname, teamname, businessunit):
     print(body.text)
 
     # Generate the email subject
-    subject = model.generate_content("Write me the subject of this email:\n"+body.text)
+    subject = model.generate_content("Write the subject of this email:\n"+body.text)
     print(subject.text)
 
     # Return the subject and body
     return subject.text, body.text
-
 
 def process_csv_and_generate_emails(csv_file, model, output_file):
     # Read the CSV file into a DataFrame
@@ -89,11 +88,10 @@ def process_csv_and_generate_emails(csv_file, model, output_file):
         email = row['email']
         name = row['name']
         lastname = row['last name']
-        teamname = row['team name']
-        businessunit = row['business unit']
+        position = row['position']
 
         # Generate the phishing email
-        subject, body = generate_email(model, name, lastname, teamname, businessunit)
+        subject, body = generate_email(model, name, lastname, position)
 
         # Append the email data to the list
         emails_data.append({
