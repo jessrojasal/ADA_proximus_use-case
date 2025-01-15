@@ -4,7 +4,7 @@ import json
 import os
 import random
 
-def initialize_genai(config_file: str = "config.json"):
+def initialize_genai(key_file: str = "key.json"):
     """
     Initializes the Google Generative AI model using an API key stored in config.json file.
 
@@ -13,14 +13,14 @@ def initialize_genai(config_file: str = "config.json"):
     :raises FileNotFoundError: If the configuration file is not found.
     :raises KeyError: If the "GEMINI_API_KEY" is missing in the configuration file.
     """
-    if os.path.exists(config_file):
-        with open(config_file, "r") as file:
-            config = json.load(file)
-            GEMINI_API_KEY = config.get("GEMINI_API_KEY")
+    if os.path.exists(key_file):
+        with open(key_file, "r") as file:
+            key = json.load(file)
+            GEMINI_API_KEY = key.get("GEMINI_API_KEY")
             if not GEMINI_API_KEY:
                 raise KeyError("GEMINI_API_KEY is missing in the configuration file.")
     else:
-        raise FileNotFoundError(f"Configuration file '{config_file}' not found.")
+        raise FileNotFoundError(f"Configuration file '{key_file}' not found.")
 
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel('gemini-pro')
