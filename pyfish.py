@@ -30,9 +30,9 @@ def create_template(name, body):
 	return template
 
 def create_campaign(name, group, page, template, profile):
-	campaign = Campaign(name=name, groups=group, page=page,
+    campaign = Campaign(name=name, groups=group, page=page,
     template=template, smtp=profile)
-	return api.campaigns.post(campaign)
+    return api.campaigns.post(campaign)
 
 def get_landing():
 	landing_page_name = "TestPage"
@@ -41,21 +41,24 @@ def get_landing():
 
 
 if __name__ == '__main__':
-	file_path = 'emails_output.csv'
-	
-	# Fetch the landing page object
-	landing_page = get_landing() 
-	print(f"Using Landing Page: {landing_page.name}")
+    file_path = 'emails_output.csv'
 
-	# TODO make get_sending_profile function
-	smtp_profiles = api.smtp.get()
-	smtp_profile = smtp_profiles[0]  # Choose the SMTP profile you want to use
-	print(f"Using SMTP Profile: {smtp_profile.name}, Host: {smtp_profile.host}")
+    # Fetch the landing page object
+    landing_page = get_landing() 
+    print(f"Using Landing Page: {landing_page.name}")
 
-	for email, subject, body in csv_generator(file_path):
-	    print(f"Email: {email}, Subject: {subject}, Body: {body}")
-	    groups = create_group('Test', 'Name', email)
-	    template = create_template('TestTemplateName', body)
-	    campaign = create_campaign('TestCampaignName', groups, landing_page, template, smtp_profile)
-	    break
+    # TODO make get_sending_profile function
+    smtp_profiles = api.smtp.get()
+    smtp_profile = smtp_profiles[0]  # Choose the SMTP profile you want to use
+    print(f"Using SMTP Profile: {smtp_profile.name}, Host: {smtp_profile.host}")
 
+    for email, subject, body in csv_generator(file_path):
+        try:
+            print(f"Email: {email}, Subject: {subject}")
+            groups = create_group('Test', 'Name', email)
+            template = create_template('TestTemplateName', body)
+            campaign = create_campaign('TestCampaignName', groups, landing_page, template, smtp_profile)
+            print('Full csv file read. All campaigns made.')
+        except Exception as e:
+            print(f"[-] Error creating template for {email}: {e}")
+            continue
