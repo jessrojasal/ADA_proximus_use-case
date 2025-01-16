@@ -1,48 +1,64 @@
-from gophish.models import Campaign
-from gophish.models import Group, User
-from gophish import *
-from gophish.models import Template
+import csv
+from gophish import Gophish
+from gophish.models import Group, User, Template, Campaign
 
-# Replace with your API key and URL of your GoPhish instance
 API_KEY = "b953f2d2a428582b9457ff928ae612d8a640ce87b542ff59a584c4e7b7409180"
 BASE_URL = "http://94.110.206.175:3333/"  # Change port and URL as needed
-
-# Connect to GoPhish
 api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
-# Fetch the email template object
-templates = api.templates.get()
-template = templates[0]  # Choose the template you want to use
-print(f"Using Template: {template.name}, Subject: {template.subject}")
 
-# Fetch the landing page object
-landing_pages = api.pages.get()
-landing_page = landing_pages[0]  # Choose the landing page you want to use
-print(f"Using Landing Page: {landing_page.name}")
 
-# Fetch the SMTP profile object
-smtp_profiles = api.smtp.get()
-smtp_profile = smtp_profiles[0]  # Choose the SMTP profile you want to use
-print(f"Using SMTP Profile: {smtp_profile.name}, Host: {smtp_profile.host}")
+def csv_generator(file_path):
+    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+        csv_reader = csv.reader(file)
+        next(csv_reader)  # Skip header row if present
+        for row in csv_reader:
+            email, subject, body = row
+            yield email, subject, body
 
-# Fetch the group object
-groups = api.groups.get()
-group = groups[0]  # Choose the group you want to use
-print(f"Using Group: {group.name}, Number of Users: {len(group.targets)}")
+def create_group(first_name, last_name, email):
+	group = Group(
+		name = first_name + last_name,
+		targets=[User(first_name=first_name, last_name=last_name, email=email)]
+	)
+	created_group = api.groups.post(group)
+	return [created_group]
 
-# Define the campaign
-campaign = Campaign(
-    name="Daily Phishing Campaign",
-    template=template,# Correct template ID here
-    page=landing_page,
-    smtp=smtp_profile,  # Correct sending profile ID here
-    url="http://your-phishing-server.com",  # Your phishing server URL
-    groups=[group]  # Group with recipients
-)
+def create_template(name, body):
+	template = Template(name=name, html=body)
+	template = api.templates.post(template)
+	return template
 
-# Create the campaign
-try:
-    response = api.campaigns.post(campaign)
-    print(f"Campaign created successfully! ID: {response.id}")
-except Exception as e:
-    print(f"Error creating campaign: {e}")
+def create_campaign(name, group, page, template, profile):
+    campaign = Campaign(name=name, groups=group, page=page,
+    template=template, smtp=profile)
+    return api.campaigns.post(campaign)
+
+def get_landing():
+	landing_page_name = "TestPage"
+	landing_pages = api.pages.get()
+	return next((lp for lp in landing_pages if lp.name == landing_page_name), None)
+
+
+if __name__ == '__main__':
+    file_path = '../data/emails_output.csv'
+
+    # Fetch the landing page object
+    landing_page = get_landing() 
+    print(f"Using Landing Page: {landing_page.name}")
+
+    # TODO make get_sending_profile function
+    smtp_profiles = api.smtp.get()
+    smtp_profile = smtp_profiles[0]  # Choose the SMTP profile you want to use
+    print(f"Using SMTP Profile: {smtp_profile.name}, Host: {smtp_profile.host}")
+
+    for email, subject, body in csv_generator(file_path):
+        try:
+            print(f"Email: {email}, Subject: {subject}")
+            groups = create_group('Test', 'Name', email)
+            template = create_template('TestTemplateName', body)
+            campaign = create_campaign('TestCampaignName', groups, landing_page, template, smtp_profile)
+            print('Full csv file read. All campaigns made.')
+        except Exception as e:
+            print(f"[-] Error creating template for {email}: {e}")
+            continue
