@@ -41,7 +41,7 @@ def get_landing():
 
 
 if __name__ == '__main__':
-    file_path = 'emails_output.csv'
+    file_path = './data/emails_output.csv'
 
     # Fetch the landing page object
     landing_page = get_landing() 
