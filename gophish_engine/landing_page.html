@@ -1,59 +1,69 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8" /><title>
-	
-        Proximus Portal - Login
+
+<head>
+    <meta charset="utf-8" />
+    <title>Portal Login</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     
-</title><meta name="viewport" content="width=device-width" /><meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" /><meta name="description" content="This is the page to login to your RingRing portal and access all of your products and add-ons." />
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href=https://cdn.ringring.be/public/public/GenericContent/css/bootstrap/bootstrap.min.css>
-    <!-- Ring Ring icons -->
-    <link rel="stylesheet" href=https://cdn.ringring.be/public/public/GenericContent/css/fonts/ringring.icons.css>
-    <!-- Theme style -->
-    <link rel="stylesheet" href=https://cdn.ringring.be/public/public/GenericContent/css/ringring.master.css>
-    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href=https://cdn.ringring.be/public/public/GenericContent/css/skins/skin-proximus.css>
-    <link rel="stylesheet" href=https://cdn.ringring.be/public/public/GenericContent/css/proximus.css>
 
-    <script src=https://cdn.ringring.be/public/public/GenericContent/js/plugins/jQuery/jquery-2.2.3.min.js></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src=https://cdn.ringring.be/public/public/GenericContent/js/plugins/jQueryUI/jquery-ui.min.js></script>
-
-    <script src=https://cdn.ringring.be/public/public/GenericContent/js/plugins/bootstrap/bootstrap.min.js></script>
-    
-
-    <link href=https://cdn.ringring.be/public/GenericContent/img/favicon_proximus.png rel="shortcut icon" type="image/x-icon">
+    <!-- Inline CSS -->
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+        /*Core typo*/
+        body {-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-weight: 400;overflow-x: hidden;overflow-y: auto;}
+        /*text*/
+        .proximus a,
+        .proximus a:hover{color:#5C2D91}
+        /*Box*/
+        .box {position: relative; border-radius: 3px; border-top: 3px solid #d2d6de;width: 100%; box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px; border-top:none; margin-bottom: 15px; padding: 20px; background-color: #fff; display: table; border-radius:0}
+        /*btn*/
+        .proximus [class*=btn-] {position: relative;}
+        .proximus .btn-primary,
+        .proximus .btn-error{padding: 9px 16px 8px;border:none}
+        .proximus a.btn-primary,
+        .proximus button.btn-primary,
+        .proximus .btn-primary {background-color: #5C2D91;border: 1px solid #5C2D91;color:#fff} 
+    </style>
 
 </head>
 
-<body class="hold-transition skin-proximus sidebar-mini sidebar-collapse proximus">
+<body class=" sidebar-mini sidebar-collapse proximus">
 <div class="wrapper">
-    <form action="/Account/Login?ReturnUrl=%2F" method="post"><input name="__RequestVerificationToken" type="hidden" value="vkZYiEhc4FYkjoxiaCPrNwXycaQ_ZaB13CNCMKd-3BLyi_G77cmMRbwSfGyA1QdTX3ZQtn7TxpPW6S-79GQdkTyVMNFQpwlOmCn87y_UySM1" />
-        <div class="row" style="padding-top: 50px;">
+    <form action="/Account/Login?ReturnUrl=%2F" method="post"> <input type="hidden" />
+        <div style="padding-top: 50px;">
             <div class="col-md-offset-4 col-sm-offset-2 col-xs-offset-1 col-md-4 col-sm-8 col-xs-10">
                 <div class="box">
                     <div class="form-horizontal">
+
+                        <!-- Logo -->
                         <div class="row ">
                             <div class="form-group">
                                 <div style="margin: auto;">
                                     <img class="center-block" 
-                                         src='https://cdn.ringring.be/public/GenericContent/img/logo_proximus.png' 
-                                         style="width: auto; max-width: 300px; margin-bottom: 20px;"/>
+                                        src='https://cdn.ringring.be/public/GenericContent/img/logo_proximus.png' 
+                                        style="width: auto; max-width: 300px; margin-bottom: 20px;"/>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Email Input -->
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-xs-3 text-right">
-                                    <label class="control-label" for="UserName">Username</label>
+                                    <label class="control-label" for="Email">Email</label>
                                 </div>
                                 <div class="col-xs-7">
-                                    <input class="form-control" data-val="true" data-val-required="The Username field is required." id="UserName" name="UserName" type="text" value="" />
-                                    <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                                    <input class="form-control" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" type="text" value="" />
+                                    <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Password Input -->
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-xs-3 text-right">
@@ -65,13 +75,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-inline text-center">
-                                    
-                                </div>
-                            </div>
-                        </div>
+
+                        <!-- Submit Button -->
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-xs-offset-3 col-md-7 col-sm-7 col-xs-7">
@@ -79,27 +84,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Links -->
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-inline text-center">
                                     <a href="/Account/ForgotPassword">Forgot Password?</a>&nbsp;&nbsp;
-                                    <a href="/Account/ForgotUsername">Forgot Username?</a>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-inline text-center" style="display: none;">
-                                    <a href="/Trial">Not yet a Member?</a>
+                                    <a href="/Account/ForgotUsername">Forgot Email?</a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
     </form>
 </div>
 </body>
 </html>
-
-<script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
-<script src="/Scripts/jquery.validate.js"></script>
-<script src="/Scripts/jquery.validate.unobtrusive.js"></script>
