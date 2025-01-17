@@ -51,6 +51,10 @@ def upload_file():
         flash(f"An error occurred: {str(e)}")
         print(f"Exception: {e}")
         return redirect(url_for('index'))
+    
+@app.route('/landing', methods=['GET'])
+def get_landing():
+    return render_template('landing_page.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

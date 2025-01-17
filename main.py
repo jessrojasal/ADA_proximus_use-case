@@ -1,3 +1,3 @@
-'''
-This is the main program that will set up the project and execute campaigns at a regular interval.
-'''
+from gophish_engine.main import create_group
+
+create_group('Maxim', 'Test', 'schuermansmaxim1@gmail.com')
