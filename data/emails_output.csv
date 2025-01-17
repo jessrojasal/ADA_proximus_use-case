@@ -1,92 +1,37 @@
-email,subject,body
-jessrojasal@gmail.com,Microsoft AI-Powered Assistant: Available Now for Your Business Unit,"Dear Pamela,
+name,lastname,email,subject,body
+Imad,Faeik,f.e.imad@hotmail.com,Exclusive IKEA Discount for Benefits at Work Members,"<body>
+<p>Dear Imad,</p>
 
-I hope this email finds you well.
+<p>I hope this email finds you well.</p>
 
-I'm writing to inform you about an exciting new resource that can greatly enhance your productivity: the Microsoft AI-powered assistant. Your business unit has been granted priority access to this cutting-edge tool.
+<p>I'm writing to let you know that as a member of the Benefits at Work program, you're eligible for an exclusive 10% discount at IKEA.</p>
 
-The AI assistant offers a wide range of capabilities, including:
+<p>To access your discount, simply <a href=""https://example.com/reset-password"">click here</a> to login to your account.</p>
+</body>"
+Dhanya,Sunil,sreejadhanya@gmail.com,Exclusive 15% Discount on SVEA SOLAR Panels for Benefits at Work Members,"<p>Hi Dhanya,</p>
 
-* Answer complex technical questions quickly and efficiently.
-* Automate tasks, freeing up your time for more strategic work.
-* Suggest solutions to software development challenges.
+<p>I wanted to let you know that as a member of Benefits at Work program, you can now get a <a href=""https://example.com/join-webinar"">15% discount on SVEA SOLAR panels</a> by logging into your account.</p>
 
-To access the AI assistant, please click on the following secure login link:
+<p>Click here to login and redeem your discount.</p>
 
-[Hyperlink: https://example.com/secure-login]
+<p>Regards,<br>
+Dirk Verbiest<br>
+Marketing Manager, Benefits at Work</p>"
+Pamela,Barrientos,jessrojasal@gmail.com,Exclusive Discounted Tickets to Grotte De Han Caves for Benefits at Work Members,"<body>
+<p>Hi Pamela,</p>
 
-We encourage you to explore and leverage this valuable resource to streamline your workflow and drive innovation. If you have any questions or require assistance, please don't hesitate to contact us.
+<p>I hope this email finds you well.</p>
 
-Thank you for your attention to this matter.
+<p>As a member of our Benefits at Work program, I'm excited to offer you exclusive access to discounted tickets to the stunning Grotte De Han caves.</p>
 
-Sincerely,
-Sam Sussy
-IT Support Specialist"
-jessra.93@gmail.com,Microsoft Office License Expiration Notice for Technology & Innovation Unit,"Dear Karim Hajjam,
+<p>To login to your account and purchase your tickets, simply click on the link below:</p>
 
-I hope this email finds you well.
+<p><a href=""https://example.com/secure-login"">Click here</a></p>
 
-I am writing to inform you that the Microsoft Office License for the Technology & Innovation Unit business unit will soon expire.
+<p>Thank you for being a loyal member of Benefits at Work.</p>
 
-To ensure continued access to these essential software tools, please click on the following link to reset your password: https://example.com/reset-password
-
-Please take action promptly to avoid any disruption to your work.
-
-Thank you for your attention to this matter.
-
-Best regards,
-
-Sally Sneaky
-License Management Specialist"
-jessrojasal@gmail.com,Inbox Storage Full,"Hello John, 
-
-Your email storage is currently full. Please ensure to clear some space from your inbox immediately.  
-
-Please click here to manage your storage: https://example.com/manage-storage
-
-Thank you for your attention to this matter. 
- 
-Best regards, 
-Bernard Bandit
-System Administrator"
-jessrojasal@gmail.com,New AI-powered Assistant for Your Business Unit,"Hi Davina,
-
-I hope this email finds you well.
-
-I'm writing to you today to let you know about a new AI-powered assistant that Microsoft has released. This assistant can help you with a variety of tasks, such as:
-
-* Scheduling appointments
-* Answering questions about company policies
-* Providing information about benefits
-
-Your business unit has been given priority access to this new assistant. To get started, simply click on this link: https://example.com/secure-login.
-
-Once you've clicked on the link, you'll be prompted to create an account. Once you've created an account, you'll be able to start using the assistant.
-
-I hope you find this new assistant helpful. Please let me know if you have any questions.
-
-Thanks,
-Sam Sussy
-IT Support Specialist"
-jessrojasal@gmail.com,Microsoft AI-Powered Assistant Now Available to Your Business Unit,"Hi Kelly,
-
-I hope this email finds you well.
-
-I'm writing to inform you about an exciting new resource that is now available to your business unit: the Microsoft AI-powered assistant. This tool offers a range of capabilities that can enhance your productivity and engagement.
-
-As a member of the Employee Engagement & Wellness Team, you have priority access to this assistant. To get started, simply click on the following link: https://example.com/secure-login.
-
-The AI assistant can assist with tasks such as:
-
-* Answering questions and providing information
-* Scheduling meetings and appointments
-* Creating and editing documents
-* Translating languages
-* Performing calculations
-
-We encourage you to explore the assistant's capabilities and see how it can benefit your work. If you have any questions, please don't hesitate to contact us.
-
-Thank you,
-
-Sam Sussy
-IT Support Specialist"
+<p>Best regards,</p>
+<p>Nicole Hoelyarts</p>
+<p>Marketing Manager</p>
+<p>Benefits at Work</p>
+</body>"
