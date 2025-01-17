@@ -2,3 +2,5 @@
 config.json
 token.json
 credentials.json
+google_api_key.json
+linkedin_credentials.json
