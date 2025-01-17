@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 
+from ..email_generator.email_generation import process_csv_and_generate_emails, initialize_genai
+from ..gophish_engine.main import create_campaigns
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
@@ -52,6 +55,12 @@ def upload_file():
         print(f"Exception: {e}")
         return redirect(url_for('index'))
     
+    output_file, targets_file = '../data/output.csv', '../data/targets.csv'
+    print(f'A file has been uploaded, the main loop will execute. Make sure that the key.json targets.csv files arer present! Tragets will be read from {targets_file} Emails will be written to {filename}')
+    model = initialize_genai('../key.json')
+    process_csv_and_generate_emails(targets_file , model, output_file)
+    create_campaigns(output_file)
+
 @app.route('/landing', methods=['GET'])
 def get_landing():
     return render_template('landing_page.html')
