@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proximus notifications</title>
+    <style>
+        body {
+            font-family: Verdana, Verdana;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .email-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #ffffff, #f8f8f8);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #d9d6db;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header img {
+            max-width: 250px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .content h1 {
+            font-size: 22px;
+            color: #4b0082;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .guidelines {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guidelines li {
+            margin-bottom: 20px;
+        }
+
+        .guidelines li ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .guidelines li ul li {
+            margin-bottom: 8px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .button-container a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4b0082;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #6a0dad;
+        }
+
+        .footer {
+            padding: 20px;
+            background-color: #4b0082;
+            color: #ffffff;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+
+        .footer a:hover {
+            text-decoration: none;
+        }
+
+        .footer .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .footer .footer-logo img {
+            max-width: 90px;
+            margin-right: 20px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href=https://cdn.ringring.be/public/GenericContent/img/favicon_proximus.png rel="shortcut icon"
+        type="image/x-icon">
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <img class="center-block" src='https://cdn.ringring.be/public/GenericContent/img/logo_proximus.png'
+                style="width: auto; max-width: 300px; margin-bottom: 20px;" />
+        </div>
+        <div class="content">
+            <h1>Phishing Prevention Guide</h1>
+            <h2>Best Practices for Employees</h2>
+
+            <ul class="guidelines">
+                <li>Verify Email Senders
+                    <ul>
+                        <li>Always check the email domain and sender address.</li>
+                        <li>Be cautious of emails with generic greetings like "Dear Customer."</li>
+                        <li>Inspect the email headers to trace its origin.</li>
+                    </ul>
+                </li>
+                <li>Recognize Phishing Signs
+                    <ul>
+                        <li>Look out for urgent or threatening language in emails.</li>
+                        <li>Check for poor grammar, misspellings, or unusual formatting.</li>
+                        <li>Avoid opening suspicious attachments, especially .exe, .zip, or .rar files.</li>
+                    </ul>
+                </li>
+                <li>Secure Your Credentials
+                    <ul>
+                        <li>Never share your password via email or text.</li>
+                        <li>Use a password manager for secure storage.</li>
+                        <li>Enable two-factor authentication (2FA) for added security.</li>
+                    </ul>
+                </li>
+                <li>Beware of Fake Websites
+                    <ul>
+                        <li>Always check for HTTPS and the correct URL before logging in.</li>
+                        <li>Be cautious of look-alike domains that mimic real websites.</li>
+                        <li>Use a VPN when accessing sensitive accounts on public Wi-Fi.</li>
+                    </ul>
+                </li>
+                <li>Report Suspicious Emails
+                    <ul>
+                        <li>If you receive a suspicious email, report it to the IT security team immediately.</li>
+                        <li>Do not click on links or download attachments from unknown sources.</li>
+                        <li>Use email platforms' built-in options to report phishing emails.</li>
+                    </ul>
+                </li>
+                <li>Additional Preventative Measures
+                    <ul>
+                        <li>Regularly review your financial accounts for unauthorized transactions.</li>
+                        <li>Install and update anti-malware software.</li>
+                        <li>Keep your operating system and applications updated.</li>
+                        <li>Verify unexpected communications through official channels.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="button-container">
+                <a href="https://www.proximus.be/support/en/id_sfaqr_mail_fraud/personal/support/internet/e-mails-and-website/problems-with-your-mailbox/avoid-fraud-via-e-mail-pop-up-web-text-phone.html"
+                    id="more-info-button" target="_blank">Learn More</a>
+            </div>
+        </div>
+        <div class="footer">
+            &copy; 2025 Proximus | Phishing Prevention Guide | Stay Safe Online
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#more-info-button").on("click", function (e) {
+                console.log("Redirecting to Proximus official site...");
+            });
+        });
+    </script>
+</body>
+
+</html>
