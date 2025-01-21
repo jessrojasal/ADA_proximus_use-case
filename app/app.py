@@ -17,6 +17,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure folder exists
 def index():
     return render_template('index.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     try:
