@@ -3,7 +3,7 @@ import os
 import json
 
 class GenAI:
-    def __init__(self, keyfile="key.json"):
+    def __init__(self, keyfile="../email_generator/key.json"):
         self.model = None
         self.key_file = keyfile
 
@@ -25,7 +25,7 @@ class GenAI:
                         "GEMINI_API_KEY is missing in the configuration file."
                     )
         else:
-            raise FileNotFoundError(f"Configuration file '{key_file}' not found.")
+            raise FileNotFoundError(f"Configuration file '{self.key_file}' not found.")
 
         genai.configure(api_key=GEMINI_API_KEY)
         self.model = genai.GenerativeModel("gemini-pro")

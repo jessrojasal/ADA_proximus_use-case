@@ -1,6 +1,6 @@
 import csv
-from utils.target import PhishingTarget
-from utils.genai import GenAI
+from .utils.target import PhishingTarget
+from .utils.genai import GenAI
 import json
 
 def process_csv_and_generate_emails(model, csv_file, output_file):

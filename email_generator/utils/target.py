@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from utils.prompt import Prompt
+from ..utils.prompt import Prompt
 
 class PhishingTarget:
     def __init__(self, data, model):

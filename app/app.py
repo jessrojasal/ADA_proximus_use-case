@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 
-from ..email_generator.email_generation import process_csv_and_generate_emails, initialize_genai
-from ..gophish_engine.main import create_campaigns
+from email_generator.email_generation import process_csv_and_generate_emails, initialize_genai
+from gophish_engine.main import create_campaigns
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'

@@ -1,3 +1,3 @@
-from gophish_engine.main import create_group
+from app.app import app
 
-create_group('Maxim', 'Test', 'schuermansmaxim1@gmail.com')
+app.run(host='0.0.0.0', debug=True)
