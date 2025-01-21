@@ -21,11 +21,11 @@ def process_csv_and_generate_emails(model, csv_file, output_file):
     print(f"Emails saved to {output_file}")
 
 
-genai = GenAI(keyfile="key.json")
+genai = GenAI(keyfile="./email_generator/key.json")
 genai.initialize_genai()
 
 process_csv_and_generate_emails(
     genai.model,
-    csv_file="../data/targets.csv",
-    output_file="../data/emails_output.json",
+    csv_file="./data/targets.csv",
+    output_file="./data/emails_output.json",
 )
