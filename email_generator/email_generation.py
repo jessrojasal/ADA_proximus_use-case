@@ -3,6 +3,7 @@ from .utils.target import PhishingTarget
 from .utils.genai import GenAI
 import json
 
+
 def process_csv_and_generate_emails(model, csv_file, output_file):
     with open(csv_file, mode="r") as file:
         csv_reader = csv.DictReader(file)
@@ -18,6 +19,7 @@ def process_csv_and_generate_emails(model, csv_file, output_file):
     with open(output_file, "w") as outfile:
         json.dump(out_data, outfile, indent=4)
     print(f"Emails saved to {output_file}")
+
 
 genai = GenAI(keyfile="key.json")
 genai.initialize_genai()
