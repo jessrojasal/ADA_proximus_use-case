@@ -78,13 +78,14 @@ class Prompt:
         Write a 5-6 lines email which looks legitimate from {random_pick["Created By"]}, a Marketing Manager from the organisation 
         Benefits at Work to {self.name} {self.lastname} who is a {self.position} in the company on the following theme: 
         {random_pick["Reason"]} as they are a member of Benefits at work program. 
-        The will have to click on this link : {random_pick["Fake Link"]} to login to their account. 
+        Instruct them politely to click the button in the email to proceed with the login to access the benefits 
         Do not specify any dates or time periods. 
         Only write the body of this email."""
         return prompt
 
-    def generate_html_tags(self, body):
+    def generate_html_tags(self, body, click_button_tag):
         prompt = f"""This is content of an email. {body} Add appropriate html tags so that it is well-structured and ready to use in an email client.
-        Provide only the raw HTML code as output and do not use backticks in the begining. Start with a <p> tag.
-        The href tag for the link should read Click here."""
+        Provide only the raw HTML code as output and do not use backticks in the begining. 
+        Start with a <h3> tag for the salutation followed by appropriate <p> tags.
+        Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://94.110.206.175:5000/landing"""
         return prompt
