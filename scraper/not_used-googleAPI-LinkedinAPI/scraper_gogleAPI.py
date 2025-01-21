@@ -4,7 +4,6 @@ import time
 import json
 import os
 
-# Load credentials from a JSON file
 def load_credentials(key_file: str = "google_api_key.json"):
     """
     Loads the Google API key and CSE ID from the specified JSON file.
@@ -25,16 +24,34 @@ def load_credentials(key_file: str = "google_api_key.json"):
     else:
         raise FileNotFoundError(f"Configuration file '{key_file}' not found.")
 
-# Set up Google Custom Search API
 def google_search(query, api_key, cse_id, **kwargs):
+    """
+    Perform a Google Custom Search API request.
+
+    :param query: The search query string.
+    :param api_key: The API key for the Google Custom Search API.
+    :param cse_id: The Custom Search Engine ID (CSE ID).
+    :param **kwargs: Additional optional parameters for the API request.
+    :return: The search results as a dictionary.
+    :raises error: If there is an error with the API request.
+    """
     service = build("customsearch", "v1", developerKey=api_key)
     res = service.cse().list(q=query, cx=cse_id, **kwargs).execute()
     return res
 
 def get_linkedin_profile(name, last_name, api_key, cse_id):
-    query = f"{name} {last_name} AND proximus site:linkedin.com/in"
+    """
+    Retrieve the LinkedIn profile URL for each person.
+
+    :param name: The first name of the person.
+    :param last_name: The last name of the person.
+    :param api_key: The API key for the Google Custom Search API.
+    :param cse_id: The Custom Search Engine ID (CSE ID).
+    :return: The URL of the LinkedIn profile if found, otherwise None.
+    :raises Exception: If an error occurs during the search process.
+    """
+    query = f"{name} {last_name} proximus linkedin"
     try:
-        # Perform the Google search using the Custom Search API
         results = google_search(query, api_key, cse_id, num=1)
         items = results.get("items", [])
         
@@ -61,12 +78,20 @@ def process_data(input_file: str = "Scraper_test.csv"):
         print(f"Searching for {row['name']} {row['last_name']}...")
         linkedin_url = get_linkedin_profile(row['name'], row['last_name'], API_KEY, CSE_ID)
         data.at[index, "LinkedIn_URL"] = linkedin_url
-        
+
         time.sleep(1)
     
     print(data)
     data.to_csv(input_file, index=False)
     print(f"Updated CSV saved to {input_file}")
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     process_data()  
