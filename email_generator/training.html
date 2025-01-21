@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proximus notifications</title>
+    <title>Proximus Notifications</title>
     <style>
         body {
             font-family: Verdana, Verdana;
@@ -60,6 +60,15 @@
 
         .guidelines li {
             margin-bottom: 20px;
+
+        }
+
+        .guidelines>li {
+            font-weight: bold;
+        }
+
+        .guidelines>li ul li {
+            font-weight: normal;
         }
 
         .guidelines li ul {
@@ -123,83 +132,198 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <link href=https://cdn.ringring.be/public/GenericContent/img/favicon_proximus.png rel="shortcut icon"
+    <link href="https://cdn.ringring.be/public/GenericContent/img/favicon_proximus.png" rel="shortcut icon"
         type="image/x-icon">
 </head>
 
 <body>
     <div class="email-container">
         <div class="header">
-            <img class="center-block" src='https://cdn.ringring.be/public/GenericContent/img/logo_proximus.png'
+            <img class="center-block" src="https://cdn.ringring.be/public/GenericContent/img/logo_proximus.png"
                 style="width: auto; max-width: 300px; margin-bottom: 20px;" />
         </div>
         <div class="content">
             <h1>Phishing Prevention Guide</h1>
-            <h2>Best Practices for Employees</h2>
+            <h2>Best Practices for next time </h2>
 
             <ul class="guidelines">
                 <li>Verify Email Senders
                     <ul>
-                        <li>Always check the email domain and sender address.</li>
-                        <li>Be cautious of emails with generic greetings like "Dear Customer."</li>
-                        <li>Inspect the email headers to trace its origin.</li>
+                        <li>Check the Email Domain and Sender Address:
+                            <ul>
+                                <li>Ensure the sender’s email address matches the official domain (e.g., @company.com
+                                    vs. @company.co).</li>
+                                <li>Be wary of addresses with slight misspellings, extra numbers, or letters (e.g.,
+                                    @micr0soft.com vs. @microsoft.com).</li>
+                            </ul>
+                        </li>
+                        <li>Look for Generic Greetings:
+                            <ul>
+                                <li>Legitimate companies often address you by name. Be cautious of emails starting with
+                                    “Dear Customer” or “Dear Sir/Madam.”</li>
+                            </ul>
+                        </li>
+                        <li>Inspect Email Headers:
+                            <ul>
+                                <li>Email headers reveal technical details about the sender. Contact IT if unsure how to
+                                    interpret them.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>Recognize Phishing Signs
                     <ul>
-                        <li>Look out for urgent or threatening language in emails.</li>
-                        <li>Check for poor grammar, misspellings, or unusual formatting.</li>
-                        <li>Avoid opening suspicious attachments, especially .exe, .zip, or .rar files.</li>
+                        <li>Urgent or Threatening Language:
+                            <ul>
+                                <li>Watch out for phrases like "Your account will be locked in 24 hours!"</li>
+                                <li>Scammers use urgency to pressure you into acting without thinking.</li>
+                            </ul>
+                        </li>
+                        <li>Poor Grammar and Formatting:
+                            <ul>
+                                <li>Legitimate organizations usually proofread their emails. Misspellings, unusual
+                                    capitalization, or awkward formatting are red flags.</li>
+                            </ul>
+                        </li>
+                        <li>Suspicious Attachments:
+                            <ul>
+                                <li>Avoid downloading unsolicited attachments, especially those with extensions like
+                                    .exe, .zip, .rar, .docm, or .xlsm.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>Secure Your Credentials
                     <ul>
-                        <li>Never share your password via email or text.</li>
-                        <li>Use a password manager for secure storage.</li>
-                        <li>Enable two-factor authentication (2FA) for added security.</li>
+                        <li>Never Share Passwords:
+                            <ul>
+                                <li>Legitimate companies will never ask for your password via email, phone, or text.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Use a Password Manager:
+                            <ul>
+                                <li>A password manager stores complex passwords securely, reducing the risk of reusing
+                                    passwords.</li>
+                            </ul>
+                        </li>
+                        <li>Enable Two-Factor Authentication (2FA):
+                            <ul>
+                                <li>Use 2FA whenever available to add an extra layer of security to your accounts.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>Beware of Fake Websites
                     <ul>
-                        <li>Always check for HTTPS and the correct URL before logging in.</li>
-                        <li>Be cautious of look-alike domains that mimic real websites.</li>
-                        <li>Use a VPN when accessing sensitive accounts on public Wi-Fi.</li>
+                        <li>Check for HTTPS:
+                            <ul>
+                                <li>Ensure the URL starts with https://. A padlock icon in the address bar indicates a
+                                    secure connection.</li>
+                            </ul>
+                        </li>
+                        <li>Scrutinize the URL:
+                            <ul>
+                                <li>Beware of subtle misspellings or added characters in the domain (e.g.,
+                                    www.paypai.com instead of www.paypal.com).</li>
+                            </ul>
+                        </li>
+                        <li>Avoid Public Wi-Fi for Sensitive Transactions:
+                            <ul>
+                                <li>Use a Virtual Private Network (VPN) to secure your internet connection on public
+                                    Wi-Fi.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>Report Suspicious Emails
                     <ul>
-                        <li>If you receive a suspicious email, report it to the IT security team immediately.</li>
-                        <li>Do not click on links or download attachments from unknown sources.</li>
-                        <li>Use email platforms' built-in options to report phishing emails.</li>
+                        <li>Forward Emails to IT:
+                            <ul>
+                                <li>If you suspect an email is phishing, forward it to your IT security team or
+                                    designated email address (e.g., phishing@company.com).</li>
+                            </ul>
+                        </li>
+                        <li>Avoid Clicking Links:
+                            <ul>
+                                <li>Do not interact with links or attachments in suspicious emails, even if they seem
+                                    urgent.</li>
+                            </ul>
+                        </li>
+                        <li>Use Reporting Tools:
+                            <ul>
+                                <li>Many email platforms (e.g., Gmail, Outlook) have built-in options to report phishing
+                                    attempts.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>Additional Preventative Measures
                     <ul>
-                        <li>Regularly review your financial accounts for unauthorized transactions.</li>
-                        <li>Install and update anti-malware software.</li>
-                        <li>Keep your operating system and applications updated.</li>
-                        <li>Verify unexpected communications through official channels.</li>
+                        <li>Monitor Financial Accounts:
+                            <ul>
+                                <li>Regularly check bank and credit card statements for unauthorized transactions. Set
+                                    up account alerts if available.</li>
+                            </ul>
+                        </li>
+                        <li>Install Anti-Malware Software:
+                            <ul>
+                                <li>Use reputable antivirus and anti-malware programs to detect and block malicious
+                                    software.</li>
+                            </ul>
+                        </li>
+                        <li>Keep Software Updated:
+                            <ul>
+                                <li>Regularly update your operating system, browser, and apps to patch security
+                                    vulnerabilities.</li>
+                            </ul>
+                        </li>
+                        <li>Verify Unexpected Communications:
+                            <ul>
+                                <li>Confirm the legitimacy of unusual requests from coworkers or vendors through
+                                    official channels before responding.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Training and Awareness
+                    <ul>
+                        <li>Participate in Phishing Simulations:
+                            <ul>
+                                <li>Use mock phishing campaigns to practice identifying threats.</li>
+                            </ul>
+                        </li>
+                        <li>Attend Cybersecurity Workshops:
+                            <ul>
+                                <li>Stay updated on the latest phishing tactics through regular training sessions.</li>
+                            </ul>
+                        </li>
+                        <li>Share Knowledge:
+                            <ul>
+                                <li>Encourage coworkers to report phishing attempts and share tips to stay safe.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
+
             <div class="button-container">
-                <a href="https://www.proximus.be/support/en/id_sfaqr_mail_fraud/personal/support/internet/e-mails-and-website/problems-with-your-mailbox/avoid-fraud-via-e-mail-pop-up-web-text-phone.html"
-                    id="more-info-button" target="_blank">Learn More</a>
+                <a
+                    href="https://www.proximus.be/support/en/id_sfaqr_mail_fraud/personal/support/internet/e-mails-and-website/problems-with-your-mailbox/avoid-fraud-via-e-mail-pop-up-web-text-phone.html">Learn
+                    More About Phishing Prevention</a>
             </div>
         </div>
         <div class="footer">
-            &copy; 2025 Proximus | Phishing Prevention Guide | Stay Safe Online
+            <p>&copy; 2025 Proximus. All rights reserved.</p>
+            <p>
+                <a
+                    href="https://www.proximus.be/support/en/id_sfaqr_mail_fraud/personal/support/internet/e-mails-and-website/problems-with-your-mailbox/avoid-fraud-via-e-mail-pop-up-web-text-phone.html">Privacy
+                    Policy</a> | <a
+                    href="https://www.proximus.be/support/en/id_cr_contact/personal/support/contact-our-customer-service.html">Contact
+                    Support</a>
+            </p>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $("#more-info-button").on("click", function (e) {
-                console.log("Redirecting to Proximus official site...");
-            });
-        });
-    </script>
 </body>
 
 </html>
