@@ -11,28 +11,24 @@ class Prompt:
         phishing_parameters_microsoft = [
             {
                 "Details": "Try the new Microsoft AI-powered assistant. Priority access for your business unit",
-                "Fake Link": "https://example.com/secure-login",
                 "Created By": "Sam Sussy",
                 "Position": "IT Support Specialist",
                 "Reason": "New AI-powered assistant",
             },
             {
                 "Details": "Your business unit is changing Microsoft Office License. Will Expire Soon",
-                "Fake Link": "https://example.com/reset-password",
                 "Created By": "Sally Sneaky",
                 "Position": "License Management Specialist",
                 "Reason": "Office License Expiry",
             },
             {
                 "Details": "Exclusive Training Webinar on New Tools",
-                "Fake Link": "https://example.com/join-webinar",
                 "Created By": "Richard Rascal",
                 "Position": "Training Coordinator",
                 "Reason": "Webinar Invitation",
             },
             {
                 "Details": "Email Storage Full. Please clear space immediately",
-                "Fake Link": "https://example.com/manage-storage",
                 "Created By": "Bernard Bandit",
                 "Position": "System Administrator",
                 "Reason": "Email Storage Full",
@@ -40,36 +36,38 @@ class Prompt:
         ]
         random_pick = random.choice(phishing_parameters_microsoft)
 
-        prompt = f"""Write an email from {random_pick["Created By"]}, a {random_pick["Position"]}, to {self.name} {self.lastname}, a {self.position} in Proximus. 
-        The email should convey the following message: {random_pick["Details"]}. 
-        Ensure the tone is professional and polite, with clear instructions for {self.name} to click on this link: {random_pick["Fake Link"]}. 
-        The subject should reflect the importance of the matter but without urgency, maintaining a formal and courteous approach. 
-        Write the body of the email including HTML tags so that it is well-structured and ready to use in an email client.
-        Provide only the raw HTML code as output. Do not use backticks,
-        The href tag for the link should read Click here. 
-        End with a professional signature from {random_pick["Position"]}."""
+        prompt = f"""
+        Act as a hacker attempting to craft a convincing phishing email from {random_pick["Created By"]}, to {self.name} {self.lastname}, whose role in Proximus is {self.position}. 
+        The email should look like a legitimate email that might be sent by someone from Proximus Group. 
+        The Proximus Group is a provider of digital services and communication solutions operating in Belgium and international markets.
+        Focus on the following topic: {random_pick["Details"]}.
+        Your goal is to make this email seem professional and credible, while subtly encouraging {self.name} to click on the button in the email. 
+        Make sure the email:
+            1. Uses formal and polite language that is typical of internal communications.
+            2. Does not raise immediate suspicion but is designed to be persuasive.
+            3. Includes a signature that looks like it came from someone at Proximus, matching the position mentioned above.
+            4. The email should be concise—ideally around 100-130 words—enough to communicate the message effectively but not too long to lose the recipient's attention or appear suspicious.
+        Do not specify any dates or time periods. 
+        Only write the body of the email ensuring the tone is respectful yet persuasive enough to make the recipient act on the link.
+        """
         return prompt
 
     def get_prompt_baw(self):
         phishing_examples = [
             {
                 "Reason": "Tickets to the Grotte De Han caves",
-                "Fake Link": "https://example.com/secure-login",
                 "Created By": "Nicole Hoelyarts",
             },
             {
                 "Reason": "10% off in IKEA",
-                "Fake Link": "https://example.com/reset-password",
                 "Created By": "Line Dalemans",
             },
             {
                 "Reason": "Kerefel 10% on select appliances",
-                "Fake Link": "https://example.com/join-webinar",
                 "Created By": "Dirk Verbiest",
             },
             {
                 "Reason": "15% discount on SVEA SOLAR panels",
-                "Fake Link": "https://example.com/join-webinar",
                 "Created By": "Dirk Verbiest",
             },
         ]
@@ -87,5 +85,6 @@ class Prompt:
         prompt = f"""This is content of an email. {body} Add appropriate html tags so that it is well-structured and ready to use in an email client.
         Provide only the raw HTML code as output and do not use backticks in the begining. 
         Start with a <h3> tag for the salutation followed by appropriate <p> tags.
-        Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://94.110.206.175:5000/landing"""
+        Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://94.110.206.175:5000/landing.
+        Include this with in the same div : <img src="{{.TrackerURL}}" style="display:none"/>"""
         return prompt
