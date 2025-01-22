@@ -1,7 +1,10 @@
 # Ignore configuration files with sensitive data
-config.json
 token.json
 credentials.json
+key.json
+.DS_Store
+venv
+uploads
 google_api_key.json
 linkedin_credentials.json
 linkedin_cookies.json
