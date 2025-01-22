@@ -4,7 +4,7 @@ from profile_content import get_profile_content
 import pandas as pd
 import os
 
-def scraper(csv_file = os.path.join(os.getcwd(), "scraper", "Scraper_test.csv")):
+def scraper(csv_file):
     try:
         # Load CSV file
         df = pd.read_csv(csv_file)
@@ -21,7 +21,7 @@ def scraper(csv_file = os.path.join(os.getcwd(), "scraper", "Scraper_test.csv"))
             updated_df = get_profile_content(updated_df, driver)
 
         # Save the updated DataFrame to a new CSV file
-        scraped_info_file = os.path.join(os.getcwd(), "scraper", "Scraped_info.csv")
+        scraped_info_file = os.path.join(os.getcwd(), "data", "scraped_targets.csv")
         updated_df.to_csv(scraped_info_file, index=False)
 
     except Exception as e:
