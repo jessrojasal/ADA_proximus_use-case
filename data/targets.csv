@@ -1,3 +1,11 @@
-name,last name,email,position
-Imad,Faeik,f.e.imad@hotmail.com,Data Engineer
-Dhanya,Sunil,sreejadhanya@gmail.com,Data Scientist
+name,last_name,email,position,department
+Pamela,Barrientos,proximus.notifications@gmail.com,Procurement - Mobile & In-Home Devices,Supply Chain & Procurement
+Karim,Hajjam,proximus.notifications@gmail.com,Project Manager,Project Management Office (PMO)
+John,Geypen,proximus.notifications@gmail.com,Engineer,Research & Development (R&D)
+Davina,D'Hollander,proximus.notifications@gmail.com,HR Manager,Human Resources
+Kelly,De Groote,proximus.notifications@gmail.com,Communication Campaign Manager,Marketing & Communications
+Bruno,Bouniton,proximus.notifications@gmail.com,Head of Partnership Development,Business Development
+Donatienne,Goemans,proximus.notifications@gmail.com,Operations Lead,Operations & Logistics
+Frédérique,Verbiest,proximus.notifications@gmail.com,Corporate Communication Manager,Corporate Affairs
+Samantha,Vanden Broeck,proximus.notifications@gmail.com,Systems & Process Specialist,Information Technology (IT)
+Killian,De Wulf,proximus.notifications@gmail.com,Design Operations,Creative & Design
