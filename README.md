@@ -1,5 +1,23 @@
 # Installation and Usage
 
+## Install using Docker
+
+1. Fetch the gophish image
+```
+docker pull gophish/gophish
+```
+2. Build the flask app cotainer:
+```
+docker build -t flask-app .
+```
+3. Run the gophish and flask containers:
+```
+docker run -d -p 5001:5001 flask-app
+docker run -d -p 3333:3333 gophish/gophish
+```
+
+## Install manually
+
 1. Make sure all dependencies are installed in a virtual environment:
 ```bash
 pip install -r requirements.txt
