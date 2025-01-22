@@ -42,22 +42,20 @@ def search_person(driver, name, last_name):
         print(f"Error while searching for {name} {last_name}: {e}")
         return None
 
-def get_linkedin_url(df, driver):
-    """Add LinkedIn profile URLs to the DataFrame.
-    
-    :param df: Dataframe.
-    :param driver: Selenium WebDriver instance.
+def get_linkedin_urls(df, driver):
     """
-    profile_urls = []
-
-    for index, row in df.iterrows():
-        name = row['name']
-        last_name = row['last_name']
-        print(f"Searching for {name} {last_name}...")
-
-        profile_url = search_person(driver, name, last_name)
-        profile_urls.append(profile_url)
-
-    df['linkedin_profile'] = profile_urls
+    Add LinkedIn profile URLs to a list of dictionaries.
     
+    :param data: List of dictionaries with 'name' and 'last_name' keys.
+    :param driver: Selenium WebDriver instance.
+    :return: Updated list of dictionaries with 'linkedin_profile' added.
+    """
+    for person in df:
+        name = person['name']
+        last_name = person['last_name']
+        print(f"Searching for {name} {last_name}...")
+        
+        profile_url = search_person(driver, name, last_name)
+        person['linkedin_profile'] = profile_url
+
     return df
