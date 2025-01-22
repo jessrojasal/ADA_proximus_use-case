@@ -9,6 +9,7 @@ import json
 import os
 from path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
 
+
 def launch_browser():
     """Launch a WebDriver for Chrome or Firefox automatically.
     Use Chrome as first option; if it fails use Firefox.
@@ -74,7 +75,7 @@ def linkedin_login(driver):
         if "feed" in driver.current_url:
             print("Login successful!")
         else:
-            raise Exception("Login failed. Please check your credentials.")
+            raise Exception("Login failed. Check your credentials.")
 
     def save_cookies():
         """Save cookies from the Selenium browser session to a JSON file."""
