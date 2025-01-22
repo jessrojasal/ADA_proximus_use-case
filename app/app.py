@@ -73,18 +73,20 @@ def upload_file():
         file.save(save_path)  # Save file
         flash(f"File '{filename}' uploaded successfully!")
         print("File uploaded successfully")
+        
+        print(f'A file has been uploaded, the main loop will execute. Make sure that the key.json targets.csv files arer present! Tragets will be read from {targets_file} Emails will be written to {filename}')
+        scraper(csv_file = os.path.join(os.getcwd(), "data", "targets.csv"))
+        output_file, targets_file, model_key = './data/output.csv', './data/scraped_targets.csv', './key.json'
+        process_csv_and_generate_emails(output_file, targets_file, model_key)
+        create_campaigns(output_file)
+
         return redirect(url_for('index'))
+    
     except Exception as e:
         flash(f"An error occurred: {str(e)}")
         print(f"Exception: {e}")
         return redirect(url_for('index'))
     
-    scraper(csv_file = os.path.join(os.getcwd(), "data", "targets.csv"))
-    output_file, targets_file, model_key = './data/output.csv', './data/scraped_targets.csv', './key.json'
-    process_csv_and_generate_emails(output_file, targets_file, model_key)
-    print(f'A file has been uploaded, the main loop will execute. Make sure that the key.json targets.csv files arer present! Tragets will be read from {targets_file} Emails will be written to {filename}')
-    create_campaigns(output_file)
-
 
 @app.route('/landing', methods=['GET'])
 def get_landing():
