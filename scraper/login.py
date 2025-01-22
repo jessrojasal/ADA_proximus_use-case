@@ -1,15 +1,43 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 import time
 import json
 import os
 from path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
 
 def launch_browser():
-    """Launch a new instance of the Chrome Webdriver."""
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    return webdriver.Chrome(options=options)
+    """Launch a WebDriver for Chrome or Firefox automatically.
+    Use Chrome as first option; if it fails use Firefox.
+    
+    :return: Selenium WebDriver instance.
+    """
+    try:
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        
+        driver_service = ChromeService(ChromeDriverManager().install())
+        print("Launching Chrome...")
+        return webdriver.Chrome(service=driver_service, options=options)
+    except Exception as e:
+        print(f"Failed to launch Chrome. Error: {e}")
+        print("Falling back to Firefox...")
+        try:
+            options = webdriver.FirefoxOptions()
+            options.add_argument("--headless")
+            
+            driver_service = FirefoxService(GeckoDriverManager().install())
+            print("Launching Firefox...")
+            return webdriver.Firefox(service=driver_service, options=options)
+        except Exception as e:
+            print(f"Failed to launch Firefox. Error: {e}")
+            raise Exception("Both Chrome and Firefox failed to launch. Please check your setup.")
 
 def linkedin_login(driver):
     """Handle LinkedIn login using cookies or credentials.
@@ -85,12 +113,11 @@ def linkedin_login(driver):
             print("Cookies file not found, logging in with credentials.")
             return False
 
-    # First attempt to log in with cookies
+    # First attempt to log in with cookies 
+    # If cookies expired or missing, log in with credentials and save cookies
     if not login_with_cookies():
-        # If cookies expired or missing, log in with credentials and save cookies
         try:
             login_to_linkedin()
             save_cookies()
         finally:
             driver.quit()
-
