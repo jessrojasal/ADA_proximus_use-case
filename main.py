@@ -1,3 +1,3 @@
-'''
-This is the main program that will set up the project and execute campaigns at a regular interval.
-'''
+from app.app import app
+
+app.run(host='0.0.0.0', port=5001, debug=True)

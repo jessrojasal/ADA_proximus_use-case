@@ -1,6 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
+from gophish import Gophish
+
+from email_generator.email_generation import process_csv_and_generate_emails
+from gophish_engine.main import create_campaigns
+
+API_KEY = "b953f2d2a428582b9457ff928ae612d8a640ce87b542ff59a584c4e7b7409180"
+BASE_URL = "http://94.110.206.175:3333/"  # Change port and URL as needed
+api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -12,7 +20,26 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure folder exists
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Fetch active campaigns from GoPhish
+    campaigns = api.campaigns.get()
+    print('Lenght of campaign data: ', len(campaigns)) 
+    # Create a list of dictionaries containing campaign data
+    campaign_data = []
+    for campaign in campaigns:
+        campaign_data.append({
+            'id': campaign.id,
+            'name': campaign.name,
+            'status': campaign.status,
+            'created_date': campaign.created_date,
+        })
+
+    return render_template('dashboard.html', campaigns=campaign_data)
+
+# API endpoint to fetch campaigns (optional, if needed for AJAX)
+@app.route('/api/campaigns', methods=['GET'])
+def get_campaigns():
+    campaigns = api.campaigns.get()
+    return jsonify([campaign.as_dict() for campaign in campaigns])
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -51,6 +78,16 @@ def upload_file():
         flash(f"An error occurred: {str(e)}")
         print(f"Exception: {e}")
         return redirect(url_for('index'))
+    
+    output_file, targets_file = '../data/output.csv', '../data/targets.csv'
+    print(f'A file has been uploaded, the main loop will execute. Make sure that the key.json targets.csv files arer present! Tragets will be read from {targets_file} Emails will be written to {filename}')
+    model = initialize_genai('../key.json')
+    process_csv_and_generate_emails(targets_file , model, output_file)
+    create_campaigns(output_file)
+
+@app.route('/landing', methods=['GET'])
+def get_landing():
+    return render_template('landing_page.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -39,10 +39,7 @@ def get_landing():
 	landing_pages = api.pages.get()
 	return next((lp for lp in landing_pages if lp.name == landing_page_name), None)
 
-
-if __name__ == '__main__':
-    file_path = '../data/emails_output.csv'
-
+def create_campaigns(input_file):
     # Fetch the landing page object
     landing_page = get_landing() 
     print(f"Using Landing Page: {landing_page.name}")
@@ -52,7 +49,7 @@ if __name__ == '__main__':
     smtp_profile = smtp_profiles[0]  # Choose the SMTP profile you want to use
     print(f"Using SMTP Profile: {smtp_profile.name}, Host: {smtp_profile.host}")
 
-    for email, subject, body in csv_generator(file_path):
+    for email, subject, body in csv_generator(input_file):
         try:
             print(f"Email: {email}, Subject: {subject}")
             groups = create_group('Test', 'Name', email)
@@ -62,3 +59,7 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"[-] Error creating template for {email}: {e}")
             continue
+
+
+if __name__ == '__main__':
+    create_campaigns('../data/emails_output.csv')
