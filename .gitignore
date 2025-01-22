@@ -5,4 +5,6 @@ key.json
 .DS_Store
 venv
 uploads
-*.pyc
+google_api_key.json
+linkedin_credentials.json
+linkedin_cookies.json
