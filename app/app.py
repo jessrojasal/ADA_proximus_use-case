@@ -7,7 +7,7 @@ from email_generator.email_generation import process_csv_and_generate_emails
 from gophish_engine.main import create_campaigns
 
 API_KEY = "b953f2d2a428582b9457ff928ae612d8a640ce87b542ff59a584c4e7b7409180"
-BASE_URL = "http://94.110.206.175:3333/"  # Change port and URL as needed
+BASE_URL = "http://13.61.9.36:3333"  # Change port and URL as needed
 api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
 app = Flask(__name__)
