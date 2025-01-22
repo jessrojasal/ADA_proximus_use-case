@@ -1,16 +1,19 @@
 import csv
 from .utils.target import PhishingTarget
-from .utils.genai import GenAI
+import google.generativeai as genai
+import os
 import json
 
+def process_csv_and_generate_emails(output_file, targets_file, model_key ):
+    model = initialize_genai(model_key)
 
-def process_csv_and_generate_emails(model, csv_file, output_file):
-    with open(csv_file, mode="r") as file:
+    with open(targets_file, mode="r") as file:
         csv_reader = csv.DictReader(file)
         rows_as_dicts = []
         for row in csv_reader:
             rows_as_dicts.append(row)
     out_data = []
+
     for row in rows_as_dicts:
         mytarget = PhishingTarget(row, model)
         mytarget.generate_email(topic="Microsoft")
@@ -20,12 +23,32 @@ def process_csv_and_generate_emails(model, csv_file, output_file):
         json.dump(out_data, outfile, indent=4)
     print(f"Emails saved to {output_file}")
 
+def initialize_genai(key_file):
+    """
+    Initializes the Google Generative AI model using an API key stored in config.json file.
 
-genai = GenAI(keyfile="./email_generator/key.json")
-genai.initialize_genai()
+    :param config_file: A string that represents the path to the config.json file.
+    :return: An instance of the initialized generative model (genai.GenerativeModel).
+    :raises FileNotFoundError: If the configuration file is not found.
+    :raises KeyError: If the "GEMINI_API_KEY" is missing in the configuration file.
+    """
+    if os.path.exists(key_file):
+        with open(key_file, "r") as file:
+            key = json.load(file)
+            GEMINI_API_KEY = key.get("GEMINI_API_KEY")
+            if not GEMINI_API_KEY:
+                raise KeyError(
+                    "GEMINI_API_KEY is missing in the configuration file."
+                )
+    else:
+        raise FileNotFoundError(f"Configuration file '{key_file}' not found.")
 
-process_csv_and_generate_emails(
-    genai.model,
-    csv_file="./data/targets.csv",
-    output_file="./data/emails_output.json",
-)
+    genai.configure(api_key=GEMINI_API_KEY)
+    return genai.GenerativeModel("gemini-pro")
+
+if __name__ == "__main":
+    process_csv_and_generate_emails(
+        output_file='./data/output.csv', 
+        targets_file='./data/targets.csv', 
+        model_key='./key.json'
+    )

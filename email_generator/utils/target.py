@@ -10,7 +10,7 @@ class PhishingTarget:
         """
         Generates an email for every given user details
         """
-        print(f"Generating email for {self.data['name']}")
+        print(f"Generating email for {self.data['name']} {self.data['last name']}")
         user_prompt = Prompt(
             self.model, self.data["name"], self.data["last name"], self.data["position"]
         )
