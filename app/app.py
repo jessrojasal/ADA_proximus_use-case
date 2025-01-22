@@ -75,7 +75,7 @@ def upload_file():
         
         print(f'A file has been uploaded, the main loop will execute. Make sure that the key.json targets.csv files arer present! Tragets will be read from {targets_file} Emails will be written to {filename}')
         scraper(csv_file = os.path.join(os.getcwd(), "data", "targets.csv"))
-        process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./key.json')
+        process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
         create_campaigns(output_file='./data/output.csv')
 
         return redirect(url_for('index'))
