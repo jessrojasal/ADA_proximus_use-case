@@ -1,13 +1,14 @@
 from scraper.login import linkedin_login, launch_browser
 from scraper.linkedin_urls import get_linkedin_url
 from scraper.profile_content import get_profile_content
-import pandas as pd
+import csv
 import os
 
 def scraper(csv_file):
     try:
         # Load CSV file
-        df = pd.read_csv(csv_file)
+        file = open(csv_file, mode="r")
+        df = csv.reader(file) 
 
         # Launch browser and log in
         driver = launch_browser()  

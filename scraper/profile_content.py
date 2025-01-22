@@ -1,4 +1,3 @@
-import pandas as pd
 import time
 from bs4 import BeautifulSoup  
 
@@ -71,23 +70,21 @@ def get_profile_content(df, driver):
     for section in target_sections:
         df[section] = None  
 
-    for index, row in df.iterrows():
+    for index, row in enumerate(df):
         profile_url = row.get('linkedin_profile')
 
-        if pd.notna(profile_url):  
-            print(f"Scraping profile: {profile_url}")
-            try:
-                profile_data = scrape_text_from_profile(driver, profile_url)
+        try:
+            profile_data = scrape_text_from_profile(driver, profile_url)
 
-                # Check the extracted data and add to appropriate columns
-                for section, text in profile_data.items():
-                    first_word = text.split("\n", 1)[0] if text else ""
-                    
-                    if first_word in target_sections:
-                        df.at[index, first_word] = text
+            # Check the extracted data and add to appropriate columns
+            for section, text in profile_data.items():
+                first_word = text.split("\n", 1)[0] if text else ""
+                
+                if first_word in target_sections:
+                    df.at[index, first_word] = text
 
-            except Exception as e:
-                print(f"Error scraping {profile_url}: {e}")
+        except Exception as e:
+            print(f"Error scraping {profile_url}: {e}")
 
     return df
 
