@@ -15,11 +15,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure folder exists
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/dashboard')
-def dashboard():
     return render_template('dashboard.html')
+
+# API endpoint to fetch campaigns (optional, if needed for AJAX)
+@app.route('/api/campaigns', methods=['GET'])
+def get_campaigns():
+    campaigns = api.campaigns.get()
+    return jsonify([campaign.as_dict() for campaign in campaigns])
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
