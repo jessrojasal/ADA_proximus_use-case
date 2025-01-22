@@ -26,7 +26,7 @@ def scraper(csv_file):
         updated_df.to_csv(scraped_info_file, index=False)
 
     except Exception as e:
-        print("e")
+        print(e)
 
     finally:
         if 'driver' in locals():
