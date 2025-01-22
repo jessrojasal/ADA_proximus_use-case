@@ -25,22 +25,16 @@ def search_person(driver, name, last_name):
     time.sleep(4)  
 
     # Search for the specific person
-    try:
-        profiles = driver.find_elements(By.CSS_SELECTOR, ".org-people-profile-card__profile-info")
-        
-        for profile in profiles:
-            name_element = profile.find_element(By.CSS_SELECTOR, ".artdeco-entity-lockup__title div")
-            name_text = name_element.text.strip()
-
-            if name_text.lower() == f"{name.lower()} {last_name.lower()}":
-                profile_link = profile.find_element(By.CSS_SELECTOR, "a").get_attribute("href")
-                return profile_link
-        
-        return None
+    profiles = driver.find_elements(By.CSS_SELECTOR, ".org-people-profile-card__profile-info")
     
-    except Exception as e:
-        print(f"Error while searching for {name} {last_name}: {e}")
-        return None
+    for profile in profiles:
+        name_element = profile.find_element(By.CSS_SELECTOR, ".artdeco-entity-lockup__title div")
+        name_text = name_element.text.strip()
+
+        if name_text.lower() == f"{name.lower()} {last_name.lower()}":
+            profile_link = profile.find_element(By.CSS_SELECTOR, "a").get_attribute("href")
+            return profile_link
+    return None
 
 def get_linkedin_urls(df, driver):
     """
