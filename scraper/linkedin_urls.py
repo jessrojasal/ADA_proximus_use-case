@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
-from path import LINKEDIN_COOKIES_FILE
+from scraper.path import LINKEDIN_COOKIES_FILE
 
 def search_person(driver, name, last_name):
     """

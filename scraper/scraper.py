@@ -1,6 +1,6 @@
-from login import linkedin_login, launch_browser
-from linkedin_urls import get_linkedin_url
-from profile_content import get_profile_content
+from scraper.login import linkedin_login, launch_browser
+from scraper.linkedin_urls import get_linkedin_url
+from scraper.profile_content import get_profile_content
 import pandas as pd
 import os
 
