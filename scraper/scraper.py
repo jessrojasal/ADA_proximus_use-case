@@ -2,31 +2,41 @@ from scraper.login import linkedin_login, launch_browser
 from scraper.linkedin_urls import get_linkedin_urls
 from scraper.profile_content import get_profile_content
 import csv
-import os
 
-def scraper(csv_file):
+def scraper(input_csv, output_csv):
+    """
+    Scrape LinkedIn profile data and save the updated data to a CSV file.
 
-    # Load CSV file
-    file = open(csv_file, mode="r")
-    df = csv.reader(file) 
-
+    :param input_csv: Path to the input CSV file.
+    :param output_csv: Path to the output CSV file.
+    """
     # Launch browser and log in
-    driver = launch_browser()  
-    linkedin_login(driver) 
+    driver = launch_browser()
+    linkedin_login(driver)
 
-    # Get LinkedIn profile url for each person
-    updated_df = get_linkedin_urls(df, driver)
+    try:
+        # Collect LinkedIn profile URLs
+        linkedin_data = get_linkedin_urls(input_file=input_csv, driver=driver)
 
-    # Get text from each profile in the DataFrame
-    if 'linkedin_profile' in updated_df.columns:
-        updated_df = get_profile_content(updated_df, driver)
+        # Process profiles to extract content
+        updated_data = get_profile_content(linkedin_data, driver)
 
-    # Save the updated DataFrame to a new CSV file
-    scraped_info_file = os.path.join(os.getcwd(), "data", "scraped_targets.csv")
-    updated_df.to_csv(scraped_info_file, index=False)
+        # Save the updated data to a CSV file
+        with open(output_csv, mode="w", newline="") as file:
+            fieldnames = updated_data[0].keys() if updated_data else []
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
 
-    if 'driver' in locals():
-        driver.quit()
+            writer.writeheader()
+            writer.writerows(updated_data)
+
+        print(f"Updated data has been saved to {output_csv}")
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+    finally:
+        if 'driver' in locals():
+            driver.quit()
 
 if __name__ == "__main__":
-    scraper()
+   scraper()

@@ -1,8 +1,7 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
-from scraper.path import LINKEDIN_COOKIES_FILE
+import csv
 
 def search_person(driver, name, last_name):
     """
@@ -36,21 +35,28 @@ def search_person(driver, name, last_name):
             return profile_link
     return None
 
-def get_linkedin_urls(df, driver):
+def get_linkedin_urls(input_file, driver):
     """
-    Add LinkedIn profile URLs to a list of dictionaries.
+    Process the input CSV file row by row and return updated rows with LinkedIn profile URLs.
     
-    :param data: List of dictionaries with 'name' and 'last_name' keys.
+    :param input_file: Path to the input CSV file.
     :param driver: Selenium WebDriver instance.
-    :return: Updated list of dictionaries with 'linkedin_profile' added.
+    :return: List of dictionaries with updated LinkedIn profile URLs.
     """
-    for person in df:
-        print(person)
-        name = person[0]
-        last_name = person[1]
-        print(f"Searching for {name} {last_name}...")
-        
-        profile_url = search_person(driver, name, last_name)
-        person['linkedin_profile'] = profile_url
+    updated_data = []  
 
-    return df
+    with open(input_file, mode="r") as file:
+        csv_reader = csv.DictReader(file)
+
+        for row in csv_reader:
+            name = row.get('name')
+            last_name = row.get('last_name')
+
+            print(f"Processing: {name} {last_name}...")
+
+            profile_url = search_person(driver, name, last_name)
+            row['linkedin_profile'] = profile_url
+
+            updated_data.append(row)  
+
+    return updated_data

@@ -44,16 +44,14 @@ def scrape_text_from_profile(driver, profile_url):
 
     return profile_data
 
-def get_profile_content(df, driver):
+def get_profile_content(data, driver):
     """
-    Add extracted text from LinkedIn profiles to the DataFrame.
-
-    :param df: DataFrame containing a column with LinkedIn profile URLs.
+    Add extracted text from LinkedIn profiles to each dictionary in the list.
+    
+    :param data: List of dictionaries containing LinkedIn profile URLs.
     :param driver: Selenium WebDriver instance.
-    :return: Updated DataFrame with profile text.
+    :return: Updated list of dictionaries with profile text added.
     """
-
-    # Define the target sections
     target_sections = [
         "About",
         "Experience",
@@ -63,29 +61,28 @@ def get_profile_content(df, driver):
         "Skills",
         "Courses",
         "Honors & awards",
-        "Languages"
+        "Languages",
     ]
-    
 
-    for section in target_sections:
-        df[section] = None  
-
-    for index, row in enumerate(df):
-        profile_url = row.get('linkedin_profile')
+    for person in data:
+        profile_url = person.get("linkedin_profile")
+        if not profile_url:
+            print(f"No LinkedIn profile URL found for {person['name']} {person['last_name']}. Skipping.")
+            continue
 
         try:
+            print(f"Scraping profile for {person['name']} {person['last_name']} at {profile_url}...")
             profile_data = scrape_text_from_profile(driver, profile_url)
 
-            # Check the extracted data and add to appropriate columns
+            # Add extracted sections to the person's dictionary
             for section, text in profile_data.items():
                 first_word = text.split("\n", 1)[0] if text else ""
-                
                 if first_word in target_sections:
-                    df.at[index, first_word] = text
-
+                    person[first_word] = text
         except Exception as e:
             print(f"Error scraping {profile_url}: {e}")
+            person["error"] = str(e)
 
-    return df
+    return data
 
 

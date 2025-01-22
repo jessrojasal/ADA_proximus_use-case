@@ -7,8 +7,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 import time
 import json
 import os
-from scraper.path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
-
+from path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
 
 def launch_browser():
     """Launch a WebDriver for Chrome or Firefox automatically.
@@ -28,7 +27,6 @@ def launch_browser():
         return webdriver.Chrome(service=driver_service, options=options)
     except Exception as e:
         print(f"Failed to launch Chrome. Error: {e}")
-        print("Falling back to Firefox...")
         try:
             options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
