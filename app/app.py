@@ -14,9 +14,8 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # Configure upload folder
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'data'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure folder exists
 
 @app.route('/')
 def index():
