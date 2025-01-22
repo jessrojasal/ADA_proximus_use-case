@@ -50,7 +50,7 @@ def get_linkedin_url(df, driver):
     """
     profile_urls = []
 
-    for index, row in df.iterrows():
+    for index, row in enumerate(df):
         name = row['name']
         last_name = row['last_name']
         print(f"Searching for {name} {last_name}...")
