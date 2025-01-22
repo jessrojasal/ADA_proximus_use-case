@@ -45,8 +45,9 @@ def get_linkedin_urls(df, driver):
     :return: Updated list of dictionaries with 'linkedin_profile' added.
     """
     for person in df:
-        name = person['name']
-        last_name = person['last_name']
+        print(person)
+        name = person[0]
+        last_name = person[1]
         print(f"Searching for {name} {last_name}...")
         
         profile_url = search_person(driver, name, last_name)
