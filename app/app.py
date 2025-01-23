@@ -6,8 +6,8 @@ from scraper.scraper import scraper
 from email_generator.email_generation import process_csv_and_generate_emails
 from gophish_engine.main import create_campaigns
 
-API_KEY = "b953f2d2a428582b9457ff928ae612d8a640ce87b542ff59a584c4e7b7409180"
-BASE_URL = "http://94.110.206.175:3333/"  # Change port and URL as needed
+API_KEY = "de15a463fccdf2bcede8c18d31f1643c638c87932b3881efde9e5a795b06ad17"
+BASE_URL = "https://13.61.9.36:3333/"  # Change port and URL as needed
 api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
 app = Flask(__name__)
@@ -42,47 +42,41 @@ def get_campaigns():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    try:
-        # Debug: Check if the form was submitted
-        print("Received POST request")
+    # Debug: Check if the form was submitted
+    print("Received POST request")
 
-        # Check if 'file' is in the request
-        if 'file' not in request.files:
-            flash("No file part in the request")
-            print("Error: No file part in the request")
-            return redirect(url_for('index'))
-
-        file = request.files['file']
-
-        # Check if a file was selected
-        if file.filename == '':
-            flash("No file selected")
-            print("Error: No file selected")
-            return redirect(url_for('index'))
-
-        # Debug: Print the filename
-        print(f"Filename received: {file.filename}")
-
-        # Save the file
-        filename = secure_filename(file.filename)  # Sanitize filename
-        save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-        print(f"Saving file to: {save_path}")  # Debug: Check save path
-
-        file.save(save_path)  # Save file
-        flash(f"File '{filename}' uploaded successfully!")
-        print("File uploaded successfully")
-        
-        scraper(input_csv="./data/targets.csv", output_csv="./data/scraped_targets.csv")
-        process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
-        create_campaigns(output_file='./data/output.csv')
-
+    # Check if 'file' is in the request
+    if 'file' not in request.files:
+        flash("No file part in the request")
+        print("Error: No file part in the request")
         return redirect(url_for('index'))
+
+    file = request.files['file']
+
+    # Check if a file was selected
+    if file.filename == '':
+        flash("No file selected")
+        print("Error: No file selected")
+        return redirect(url_for('index'))
+
+    # Debug: Print the filename
+    print(f"Filename received: {file.filename}")
+
+    # Save the file
+    filename = secure_filename(file.filename)  # Sanitize filename
+    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    print(f"Saving file to: {save_path}")  # Debug: Check save path
+
+    file.save(save_path)  # Save file
+    flash(f"File '{filename}' uploaded successfully!")
+    print("File uploaded successfully")
     
-    except Exception as e:
-        flash(f"An error occurred: {str(e)}")
-        print(f"Exception: {e}")
-        return redirect(url_for('index'))
+    #scraper(input_csv="./data/targets.csv", output_csv="./data/scraped_targets.csv")
+    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
+    create_campaigns(output_file='./data/output.csv')
+
+    return redirect(url_for('index'))
     
 
 @app.route('/landing', methods=['GET'])
