@@ -33,7 +33,7 @@ def launch_browser():
             
             #driver_service = FirefoxService(GeckoDriverManager().install())
             print("Launching Firefox...")
-            service = Service("/usr/local/bin/geckodriver")
+            service = FirefoxService("/usr/local/bin/geckodriver")
             return webdriver.Firefox(service=service, options=options)
         except Exception as e:
             print(f"Failed to launch Firefox. Error: {e}")
