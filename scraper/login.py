@@ -30,6 +30,7 @@ def launch_browser():
         try:
             options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
+            options.binary_location = "/usr/bin/firefox"
             
             #driver_service = FirefoxService(GeckoDriverManager().install())
             print("Launching Firefox...")
