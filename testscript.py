@@ -15,11 +15,11 @@ def read_json(file_path):
         data = json.load(file)
     return data
 
-def create_group(email):
+def create_group(email, first_name, last_name):
     """Creates a group with a single recipient."""
     group = Group(
-        name=f"Group for {email}",
-        targets=[User(first_name="Recipient", email=email)]
+        name=first_name + last_name,
+        targets=[User(first_name=first_name, email=email)]
     )
     return api.groups.post(group)
 
@@ -79,11 +79,13 @@ def main():
     for entry in email_data:
         email = entry['email']
         email_body = entry['body']
+        first_name = entry['name']
+        last_name = entry['last name']
 
         print(f"Processing email: {email}")
 
         # Create a group for the email
-        group = create_group(email)
+        group = create_group(email, first_name, last_name)
 
         # Create an email template for the email
         template_name = f"Template for {email}"
