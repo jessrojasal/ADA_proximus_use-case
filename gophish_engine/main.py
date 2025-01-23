@@ -13,6 +13,7 @@ def csv_generator(file_path):
         csv_reader = csv.reader(file)
         next(csv_reader)  # Skip header row if present
         for row in csv_reader:
+            print('row in csv_generator function:', row)
             email, subject, body = row
             yield email, subject, body
 

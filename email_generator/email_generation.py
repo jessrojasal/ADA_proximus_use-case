@@ -3,6 +3,7 @@ from .utils.target import PhishingTarget
 import google.generativeai as genai
 import os
 import json
+import time
 
 def process_csv_and_generate_emails(output_file, targets_file, model_key ):
     model = initialize_genai(model_key)
@@ -13,11 +14,14 @@ def process_csv_and_generate_emails(output_file, targets_file, model_key ):
         for row in csv_reader:
             rows_as_dicts.append(row)
     out_data = []
+    print('Out data: ', out_data)
 
     for row in rows_as_dicts:
+        print('row: ', row)
         mytarget = PhishingTarget(row, model)
         mytarget.generate_email(topic="Microsoft")
         out_data.append(mytarget.data)
+        time.sleep(3)
 
     with open(output_file, "w") as outfile:
         json.dump(out_data, outfile, indent=4)

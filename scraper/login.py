@@ -22,9 +22,9 @@ def launch_browser():
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         
-        driver_service = ChromeService(ChromeDriverManager().install())
+        #driver_service = ChromeService(ChromeDriverManager().install())
         print("Launching Chrome...")
-        return webdriver.Chrome(service=driver_service, options=options)
+        return webdriver.Chrome(options=options)
     except Exception as e:
         print(f"Failed to launch Chrome. Error: {e}")
         try:

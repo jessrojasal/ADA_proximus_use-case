@@ -72,8 +72,15 @@ def upload_file():
     flash(f"File '{filename}' uploaded successfully!")
     print("File uploaded successfully")
     
-    scraper(input_csv="./data/targets.csv", output_csv="./data/scraped_targets.csv")
-    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
+    try:
+        scraper(input_csv="./data/targets.csv", output_csv="./data/scraped_targets.csv")
+        targets_file = './data/scraped_targets.csv'
+    except Exception as e:
+        print('Something went wrong in the scraper call: ', e)
+        print('Continuing without scraping')
+        targets_file = './data/targets.csv'
+        pass
+    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file=targets_file, model_key='./email_generator/key.json')
     create_campaigns(input_file='./data/output.csv')
 
     return redirect(url_for('index'))
