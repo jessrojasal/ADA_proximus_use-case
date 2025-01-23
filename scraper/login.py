@@ -31,9 +31,10 @@ def launch_browser():
             options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
             
-            driver_service = FirefoxService(GeckoDriverManager().install())
+            #driver_service = FirefoxService(GeckoDriverManager().install())
             print("Launching Firefox...")
-            return webdriver.Firefox(service=driver_service, options=options)
+            service = Service("/usr/local/bin/geckodriver")
+            return webdriver.Firefox(service=service, options=options)
         except Exception as e:
             print(f"Failed to launch Firefox. Error: {e}")
             raise Exception("Both Chrome and Firefox failed to launch. Please check your setup.")
