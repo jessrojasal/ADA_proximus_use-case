@@ -26,7 +26,7 @@ RUN CHROME_DRIVER_VERSION=$(wget -qO- https://chromedriver.storage.googleapis.co
     rm chromedriver.zip
 
 RUN pip install -r requirements.txt
-RUN pip install selenium
+#RUN pip install selenium
 ENV PYTHONUNBUFFERED=1
 EXPOSE 5001
 CMD ["python", "main.py"]
