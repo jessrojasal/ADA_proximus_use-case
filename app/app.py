@@ -74,7 +74,7 @@ def upload_file():
     
     #scraper(input_csv="./data/targets.csv", output_csv="./data/scraped_targets.csv")
     process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
-    create_campaigns(output_file='./data/output.csv')
+    create_campaigns(input_file='./data/output.csv')
 
     return redirect(url_for('index'))
     

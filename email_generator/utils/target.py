@@ -10,9 +10,9 @@ class PhishingTarget:
         """
         Generates an email for every given user details
         """
-        print(f"Generating email for {self.data['name']} {self.data['last name']}")
+        print(f"Generating email for {self.data['name']} {self.data['last_name']}")
         user_prompt = Prompt(
-            self.model, self.data["name"], self.data["last name"], self.data["position"]
+            self.model, self.data["name"], self.data["last_name"], self.data["position"]
         )
         click_button_tag = "Click here"
         if (topic == "Benefits At Work"):
