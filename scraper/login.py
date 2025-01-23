@@ -7,7 +7,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 import time
 import json
 import os
-from path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
+from scraper.path import LINKEDIN_CREDENTIALS_FILE, LINKEDIN_COOKIES_FILE
 
 def launch_browser():
     """Launch a WebDriver for Chrome or Firefox automatically.
