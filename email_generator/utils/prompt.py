@@ -11,25 +11,25 @@ class Prompt:
         phishing_parameters_microsoft = [
             {
                 "Details": "Try the new Microsoft AI-powered assistant. Priority access for your business unit",
-                "Created By": "Sam Sussy",
+                "Created By": "Sam Martin",
                 "Position": "IT Support Specialist",
                 "Reason": "New AI-powered assistant",
             },
             {
                 "Details": "Your business unit is changing Microsoft Office License. Will Expire Soon",
-                "Created By": "Sally Sneaky",
+                "Created By": "Sally Vermeesch",
                 "Position": "License Management Specialist",
                 "Reason": "Office License Expiry",
             },
             {
                 "Details": "Exclusive Training Webinar on New Tools",
-                "Created By": "Richard Rascal",
+                "Created By": "Richard Van Riel",
                 "Position": "Training Coordinator",
                 "Reason": "Webinar Invitation",
             },
             {
                 "Details": "Email Storage Full. Please clear space immediately",
-                "Created By": "Bernard Bandit",
+                "Created By": "Bernard Tuveri",
                 "Position": "System Administrator",
                 "Reason": "Email Storage Full",
             },
@@ -84,7 +84,27 @@ class Prompt:
     def generate_html_tags(self, body, click_button_tag):
         prompt = f"""This is content of an email. {body} Add appropriate html tags so that it is well-structured and ready to use in an email client.
         Provide only the raw HTML code as output and do not use backticks in the begining. 
+        Do not include any variable information within square brackets as this goes to an email server directly.
         Start with a <h3> tag for the salutation followed by appropriate <p> tags.
         Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://13.61.9.36:5001/landing.
         Include this with in the same div : <img src="{{.TrackerURL}}" style="display:none"/>"""
+        #prompt = prompt.replace('{.TrackerURL}','{{.TrackerURL}}')
+        return prompt
+    
+    def linkedin_cert(self, cert):
+        prompt = f"""You are a hacker trying to phish people at Proximus.
+        This is the licences and certifications section of {self.name} {self.lastname} from LinkedIn {cert}.
+        Pick a certification from this list which expires soon. 
+        Draft a 5-6 lines personalised phishing email created by Bernard Thienpont from LinkedIn with the certification name and state that the certificate expires soon. 
+        Politely prompt them to click the button in the email to renew their certificate. 
+        Do not include any variable information within square brackets as this goes to an email server directly.
+        Only write the body of the email ensuring the tone is respectful yet persuasive enough to make the recipient act on the link.
+        """
+        return prompt
+    
+    def linkedin_experience(self, experience):
+        prompt = f"""You are a hacker trying to phish people at Proximus.
+        This is the experience section of {self.name} {self.lastname} from LinkedIn {experience}.
+        Draft a 5-6 lines personalised email for this person such that they are politely prompted to click the button in the email to proceed with the login. 
+        Do not include any variable information within square brackets as this goes to an email server directly """
         return prompt
