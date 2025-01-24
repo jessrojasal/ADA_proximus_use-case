@@ -17,10 +17,10 @@ def launch_browser():
     """
     try:
         options = webdriver.ChromeOptions()
-        #options.add_argument("--headless")
-        #options.add_argument("--disable-gpu")
-        #options.add_argument("--no-sandbox")
-        #options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         
         #driver_service = ChromeService(ChromeDriverManager().install())
         print("Launching Chrome...")
@@ -62,9 +62,11 @@ def linkedin_login(driver):
         time.sleep(3)
 
         username = driver.find_element(By.XPATH, "//input[@name='session_key']")
+        time.sleep(3)
         password_field = driver.find_element(By.XPATH, "//input[@name='session_password']")
         
         username.send_keys(email)
+        time.sleep(3)
         password_field.send_keys(password)
         time.sleep(3)
 
