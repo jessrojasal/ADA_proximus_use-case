@@ -3,6 +3,7 @@ from .utils.target import PhishingTarget
 import google.generativeai as genai
 import os
 import json
+import time
 
 # Main function to process CSV and generate emails for every target
 def process_csv_and_generate_emails(output_file, targets_file, model_key ):
@@ -14,8 +15,10 @@ def process_csv_and_generate_emails(output_file, targets_file, model_key ):
         for row in csv_reader:
             rows_as_dicts.append(row)
     out_data = []
+    print('Out data: ', out_data)
 
     for row in rows_as_dicts:
+        print('row: ', row)
         mytarget = PhishingTarget(row, model)
         mytarget.generate_email(topic="Microsoft")
         out_data.append({"name":mytarget.data["name"],

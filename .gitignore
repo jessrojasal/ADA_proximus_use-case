@@ -8,4 +8,5 @@ uploads
 google_api_key.json
 linkedin_credentials.json
 linkedin_cookies.json
+*.pyc
 

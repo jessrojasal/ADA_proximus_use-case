@@ -22,18 +22,20 @@ def launch_browser():
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         
-        driver_service = ChromeService(ChromeDriverManager().install())
+        #driver_service = ChromeService(ChromeDriverManager().install())
         print("Launching Chrome...")
-        return webdriver.Chrome(service=driver_service, options=options)
+        return webdriver.Chrome(options=options)
     except Exception as e:
         print(f"Failed to launch Chrome. Error: {e}")
         try:
             options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
+            options.binary_location = "/usr/bin/firefox"
             
-            driver_service = FirefoxService(GeckoDriverManager().install())
+            #driver_service = FirefoxService(GeckoDriverManager().install())
             print("Launching Firefox...")
-            return webdriver.Firefox(service=driver_service, options=options)
+            service = FirefoxService("/usr/local/bin/geckodriver")
+            return webdriver.Firefox(service=service, options=options)
         except Exception as e:
             print(f"Failed to launch Firefox. Error: {e}")
             raise Exception("Both Chrome and Firefox failed to launch. Please check your setup.")
@@ -60,9 +62,11 @@ def linkedin_login(driver):
         time.sleep(3)
 
         username = driver.find_element(By.XPATH, "//input[@name='session_key']")
+        time.sleep(3)
         password_field = driver.find_element(By.XPATH, "//input[@name='session_password']")
         
         username.send_keys(email)
+        time.sleep(3)
         password_field.send_keys(password)
         time.sleep(3)
 
