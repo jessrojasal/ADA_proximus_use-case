@@ -3,7 +3,7 @@ from gophish import Gophish
 from gophish.models import Group, User, Template, Campaign
 
 API_KEY = "de15a463fccdf2bcede8c18d31f1643c638c87932b3881efde9e5a795b06ad17"
-BASE_URL = "https://13.61.9.36:3333/campaigns"  # Change port and URL as needed
+BASE_URL = "https://13.61.9.36:3333/"  # Change port and URL as needed
 api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
 
