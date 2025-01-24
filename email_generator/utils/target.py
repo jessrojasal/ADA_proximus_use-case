@@ -1,5 +1,6 @@
 import google.generativeai as genai
 from ..utils.prompt import Prompt
+from time import sleep
 
 class PhishingTarget:
     def __init__(self, data, model):
@@ -10,9 +11,9 @@ class PhishingTarget:
         """
         Generates an email for every given user details
         """
-        print(f"Generating email for {self.data['name']} {self.data['last name']}")
+        print(f"Generating email for {self.data['name']} {self.data['last_name']}")
         user_prompt = Prompt(
-            self.model, self.data["name"], self.data["last name"], self.data["position"]
+            self.model, self.data["name"], self.data["last_name"], self.data["position"]
         )
         click_button_tag = "Click here"
         if (topic == "Benefits At Work"):
@@ -21,9 +22,19 @@ class PhishingTarget:
         elif (topic == "Microsoft"):
             prompt = user_prompt.get_prompt_microsoft()
             click_button_tag = "Activate now"
-
+        elif (topic == "LinkedIn"):
+            if self.data["Licenses & certifications"] != '':
+                prompt = user_prompt.linkedin_cert(self.data["Licenses & certifications"])
+                click_button_tag = "Renew now"
+            else:
+                prompt = user_prompt.get_prompt_microsoft()
+            
         body = self.model.generate_content(prompt)
+        sleep(3)
+        #print(body.text)
         html_prompt = user_prompt.generate_html_tags(body.text, click_button_tag)
+        sleep(3)
+        #print(html_prompt)
         html_body = self.model.generate_content(html_prompt)
 
         subject = self.model.generate_content(
@@ -33,7 +44,6 @@ class PhishingTarget:
         html_content = f"{header}{html_body.text}{footer}"
         self.data["body"] = html_content
         self.data["subject"] = subject.text
-        #print(self.data)
 
     def return_header_footer(self):
         header = """
@@ -145,9 +155,11 @@ class PhishingTarget:
                 <h1>Proximus Group | </h1>
                 <h2>Boldly building a connected world that people trust so society blooms</h2>
             </div>
+        <div class="content">
         """.strip()
 
         footer = """
+        </div>
                 <div class="footer">
                     <p>All rights reserved. © Proximus 2025.</p>
                     <a href=".">Unsubscribe</a> | <a href=".">Learn</a> | <a href=".">Help Center</a>

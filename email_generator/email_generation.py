@@ -4,11 +4,12 @@ import google.generativeai as genai
 import os
 import json
 
+# Main function to process CSV and generate emails for every target
 def process_csv_and_generate_emails(output_file, targets_file, model_key ):
     model = initialize_genai(model_key)
-
-    with open(targets_file, mode="r") as file:
-        csv_reader = csv.DictReader(file)
+ 
+    with open(targets_file, mode="r", newline='', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file, quotechar='"')
         rows_as_dicts = []
         for row in csv_reader:
             rows_as_dicts.append(row)
@@ -17,7 +18,12 @@ def process_csv_and_generate_emails(output_file, targets_file, model_key ):
     for row in rows_as_dicts:
         mytarget = PhishingTarget(row, model)
         mytarget.generate_email(topic="Microsoft")
-        out_data.append(mytarget.data)
+        out_data.append({"name":mytarget.data["name"],
+                          "last name":mytarget.data["last_name"],
+                          "email":mytarget.data["email"],
+                          "position":mytarget.data["position"],
+                          "body":mytarget.data["body"],
+                          "subject":mytarget.data["subject"]})
 
     with open(output_file, "w") as outfile:
         json.dump(out_data, outfile, indent=4)
@@ -48,7 +54,7 @@ def initialize_genai(key_file):
 
 if __name__ == "__main":
     process_csv_and_generate_emails(
-        output_file='./data/output.csv', 
-        targets_file='./data/targets.csv', 
+        output_file='../data/output.csv', 
+        targets_file='../data/scraped_targets.csv', 
         model_key='./key.json'
     )
