@@ -80,7 +80,7 @@ def upload_file():
         print('Continuing without scraping')
         targets_file = './data/targets.csv'
         pass
-    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file=targets_file, model_key='./email_generator/key.json')
+    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
     create_campaigns(input_file='./data/output.csv')
 
     return redirect(url_for('index'))

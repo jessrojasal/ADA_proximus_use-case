@@ -23,9 +23,9 @@ def csv_generator(file_path):
             email, subject, body = row
             yield email, subject, body
 
-def create_group(first_name, last_name, email):
+def create_group(name, first_name, last_name, email):
 	group = Group(
-		name = first_name + last_name,
+		name = name,
 		targets=[User(first_name=first_name, last_name=last_name, email=email)]
 	)
 	created_group = api.groups.post(group)
@@ -59,9 +59,9 @@ def create_campaigns(input_file):
     for email, subject, body in json_generator(input_file):
         try:
             print(f"Email: {email}, Subject: {subject}")
-            groups = create_group('Test', 'Name', email)
-            template = create_template('TestTemplateName', body)
-            campaign = create_campaign('TestCampaignName', groups, landing_page, template, smtp_profile)
+            groups = create_group(email, 'Test', 'Name', email)
+            template = create_template(email, body)
+            campaign = create_campaign(email, groups, landing_page, template, smtp_profile)
             print('Full csv file read. All campaigns made.')
         except Exception as e:
             print(f"[-] Error creating template for {email}: {e}")

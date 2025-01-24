@@ -85,6 +85,6 @@ class Prompt:
         prompt = f"""This is content of an email. {body} Add appropriate html tags so that it is well-structured and ready to use in an email client.
         Provide only the raw HTML code as output and do not use backticks in the begining. 
         Start with a <h3> tag for the salutation followed by appropriate <p> tags.
-        Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://94.110.206.175:5000/landing.
+        Set the button to click within <div class="button-container"> with the text {click_button_tag} and the link as http://13.61.9.36:5001/landing.
         Include this with in the same div : <img src="{{.TrackerURL}}" style="display:none"/>"""
         return prompt
