@@ -5,13 +5,12 @@ from gophish import Gophish
 from scraper.scraper import scraper
 from email_generator.email_generation import process_csv_and_generate_emails
 from gophish_engine.main import create_campaigns
+from config.settings import API_KEY, API_URL, GEMINI_KEY
 
-API_KEY = "de15a463fccdf2bcede8c18d31f1643c638c87932b3881efde9e5a795b06ad17"
-BASE_URL = "https://13.61.9.36:3333/"  # Change port and URL as needed
 api = Gophish(API_KEY, host=BASE_URL, verify=False)  # Set verify=True for SSL
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'your_secret_key' # TODO add to config
 
 # Configure upload folder
 UPLOAD_FOLDER = 'data'
@@ -34,7 +33,7 @@ def index():
 
     return render_template('dashboard.html', campaigns=campaign_data)
 
-# API endpoint to fetch campaigns (optional, if needed for AJAX)
+# API endpoint to fetch campaigns 
 @app.route('/api/campaigns', methods=['GET'])
 def get_campaigns():
     campaigns = api.campaigns.get()
@@ -80,7 +79,7 @@ def upload_file():
         print('Continuing without scraping')
         targets_file = './data/targets.csv'
         pass
-    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key='./email_generator/key.json')
+    process_csv_and_generate_emails(output_file='./data/output.csv', targets_file='./data/scraped_targets.csv', model_key=GEMINI_KEY)
     create_campaigns(input_file='./data/output.csv')
 
     return redirect(url_for('index'))
