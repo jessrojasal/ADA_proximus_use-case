@@ -13,7 +13,7 @@ groups of 6-7 people. The group that contributed this repo consisted of 6 people
 
 # Installation and Usage
 
-**Note**: Several environment variables and credentials are defined in `config/settings.py` and `scraper/linkedin_credentials.json`. The program will not function as intended if these are not defined.
+**Note**: Several environment variables and credentials are read in `config/settings.py` and `scraper/linkedin_credentials.json`. The program will not function as intended if these are not defined in a `.env` file.
 
 ## Install using Docker
 
