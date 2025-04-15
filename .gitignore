@@ -7,7 +7,6 @@ google_api_key.json
 *.pyc
 __pycahce__
 .*
-
 gophish_engine/gophish-v0.12.1-linux-64bit/gophish_admin.crt
 gophish_engine/gophish-v0.12.1-linux-64bit/gophish_admin.key
 gophish_engine/config.json
