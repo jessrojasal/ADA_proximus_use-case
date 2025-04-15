@@ -1,14 +1,20 @@
 # Ignore configuration files with sensitive data
-token.json
-credentials.json
 key.json
 .DS_Store
 venv
 uploads
 google_api_key.json
-linkedin_credentials.json
-linkedin_cookies.json
 *.pyc
 __pycahce__
 .*
 
+gophish_engine/gophish-v0.12.1-linux-64bit/gophish_admin.crt
+gophish_engine/gophish-v0.12.1-linux-64bit/gophish_admin.key
+gophish_engine/config.json
+archive/ 
+data/
+gophish_engine/config.json
+scraper/linkedin_cookies.json
+scraper/linkedin_credentials.json
+scraper/linkedin_credentials2.json
+presentation.pdf
